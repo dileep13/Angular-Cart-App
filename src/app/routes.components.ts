@@ -40,21 +40,34 @@ export class ManageProductComponent{
   addProduct(newProduct:Product)
   {
     this.productService.addProduct(newProduct).subscribe(data=>{
-      console.log(data);
+      if(newProduct.id=='')
+      {
+        this.productList.push(data.json());
+      }
+      else
+      {
+        let updatedIndex:number = this.productList.findIndex(x => x.id === newProduct.id);
+        this.productList[updatedIndex]=data.json();
+      }
       this.formProduct = new Product("","",null,"");
     },error =>{
       console.log(error.toLocaleString());
     });
   }
 
-  removeProduct(productId:number)
+  removeProduct(productId:string,index:number)
   {
     this.productService.deleteProduct(productId).subscribe(data=>{
-      console.log(data);
+      this.productList.splice(index,1);
       this.formProduct = new Product("","",null,"");
     },error =>{
       console.log(error.toLocaleString());
     });
+  }
+
+  edit(product:Product)
+  {
+    Object.assign(this.formProduct,product);
   }
 }
 

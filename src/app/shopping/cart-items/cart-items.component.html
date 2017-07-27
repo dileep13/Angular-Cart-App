@@ -16,7 +16,7 @@
     <td><input type="number" min="1" [(ngModel)]="item.quantity" style="width:50px"></td>
     <td>{{item.price * item.quantity}}</td>
     <td>
-      <button class="glyphicon glyphicon-remove btn-danger" (click)="removeCartItem(i)"></button>
+      <button class="glyphicon glyphicon-remove btn btn-danger" (click)="removeCartItem(i)"></button>
     </td>
   </tr>
   <tr>
